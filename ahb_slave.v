@@ -10,21 +10,21 @@
 //-------------------------------------------------------------------------
 
 module ahb_slave(
-  input hclk,
-  input hresetn,
-  input hsel,
-  input [31:0] haddr,
-  input hwrite,
-  input [2:0] hsize,
-  input [2:0] hburst,
-  input [3:0] hprot,
-  input [1:0] htrans,
-  input hmastlock,
-  input hready,
-  input [31:0] hwdata,
-  output reg hreadyout,
-  output reg hresp,
-  output reg [31:0] hrdata
+  input hclk, // clock
+  input hresetn, // reset active low
+  input hsel, // HIGH => indicates that this slave is the one selected for transfer
+  input [31:0] haddr, // byte address of transfer
+  input hwrite, // HIGH => WRITE, LOW => READ
+  input [2:0] hsize, // indicates transfer size
+  input [2:0] hburst, // indicates how many transfers are in burst and how address increments
+  input [3:0] hprot, // protection control signal. provides info about access type
+  input [1:0] htrans, // Indicates transfer type (IDLE, BUSY, NONSEQUENTIAL, SEQUENTIAL)
+  input hmastlock, // Indicates that the current transfer is part of a locked sequence. It has the same timing as the address and control signals.
+  input hready, // HIGH => Previous transfer complete
+  input [31:0] hwdata, // write data transfered from manager to subordinate
+  output reg hreadyout, // when high, means that transfer has finished on bus. can be driven low to extend transfer
+  output reg hresp, // LOW => transfer status OK. HIGH => transfer status ERROR 
+  output reg [31:0] hrdata // read data
 );
 
 //----------------------------------------------------------------------
