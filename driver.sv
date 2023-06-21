@@ -31,6 +31,7 @@ class driver;
     vif.hmastlock <= 0;
     vif.hready <= 0;
     vif.hwdata <= 0;
+    vif.hburst<=0;
     
     wait(!vif.reset);
     $display("[ DRIVER ] ----- Reset Ended   -----");
@@ -51,6 +52,7 @@ class driver;
     vif.hmastlock <= trans.hmastlock;
     vif.hready <= trans.hready;
     vif.hwdata <= trans.hwdata;
+    vif.hburst<=trans.hburst;
 
       @(posedge vif.clk);
       trans.display("[ Driver ]");
