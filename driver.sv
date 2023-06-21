@@ -20,7 +20,7 @@ class driver;
   
   //Reset task, Reset the Interface signals to default/initial values
   task reset;
-    wait(vif.hreset);
+    wait(vif.hresetn);
     $display("[ DRIVER ] ----- Reset Started -----");
     vif.hsel <= 0;
     vif.haddr <= 0;
@@ -33,7 +33,7 @@ class driver;
     vif.hwdata <= 0;
     vif.hburst<=0;
     
-    wait(!vif.hreset);
+    wait(!vif.hresetn);
     $display("[ DRIVER ] ----- Reset Ended   -----");
   endtask
   
